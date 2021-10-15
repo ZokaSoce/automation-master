@@ -78,7 +78,7 @@
         },
         "redisSkuFamily": {
             "type": "string",
-            "defaultValue": "S",
+            "defaultValue": "C",
             "metadata": {
                 "description": "Azure Redis family (C-Standard or P-Premium)."
             }
