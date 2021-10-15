@@ -1,0 +1,51 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "eastus2"
+        },
+        "webName": {
+            "value": "app-zorantest01"
+        },
+        "webSku": {
+            "value": "P2V2"
+        },
+        "storageAccountName": {
+            "value": "stzorantest01"
+        },
+        "storageAccountSku": {
+            "value": "Standard_GRS"
+        },
+        "keyVaultName": {
+            "value": "kv-zorantest01"
+        },
+        "keyVaultSku": {
+            "value": "Standard"
+        },
+        "cognitiveSearchName": {
+            "value": "srch-zorantest01"
+        },
+        "cognitiveSearchSku": {
+            "value": "standard"
+        },
+        "redisCacheName": {
+            "value": "redis-zorantest01"
+        },
+        "redisSkuName": {
+            "value": "Standard"
+        },
+        "redisSkuFamily": {
+            "value": "C"
+        },
+        "redisSkuCapacity": {
+            "value": "1"
+        },
+        "funcAppName": {
+            "value": "func-zorantest01"
+        },
+        "cosmosDBAccountName": {
+            "value": "cosmos-zorantest01"
+        }
+    }
+}
