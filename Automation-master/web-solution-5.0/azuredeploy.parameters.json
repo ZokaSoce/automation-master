@@ -46,6 +46,9 @@
         },
         "cosmosDBAccountName": {
             "value": "cosmos-zorantest03"
+        },
+        "workspacesLogName": {
+            "value": "log-zorantest03"
         }
     }
 }
