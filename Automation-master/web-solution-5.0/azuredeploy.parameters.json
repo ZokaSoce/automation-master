@@ -6,31 +6,31 @@
             "value": "eastus2"
         },
         "webName": {
-            "value": "app-zorantest01"
+            "value": "app-zorantest03"
         },
         "webSku": {
             "value": "P2V2"
         },
         "storageAccountName": {
-            "value": "stzorantest01"
+            "value": "stzorantest03"
         },
         "storageAccountSku": {
-            "value": "Standard_GRS"
+            "value": "Standard_LRS"
         },
         "keyVaultName": {
-            "value": "kv-zorantest01"
+            "value": "kv-zorantest03"
         },
         "keyVaultSku": {
             "value": "Standard"
         },
         "cognitiveSearchName": {
-            "value": "srch-zorantest01"
+            "value": "srch-zorantest03"
         },
         "cognitiveSearchSku": {
             "value": "standard"
         },
         "redisCacheName": {
-            "value": "redis-zorantest01"
+            "value": "redis-zorantest03"
         },
         "redisSkuName": {
             "value": "Standard"
@@ -42,10 +42,10 @@
             "value": "1"
         },
         "funcAppName": {
-            "value": "func-zorantest01"
+            "value": "func-zorantest03"
         },
         "cosmosDBAccountName": {
-            "value": "cosmos-zorantest01"
+            "value": "cosmos-zorantest03"
         }
     }
 }
