@@ -23,7 +23,7 @@
         },
         "redisSkuFamily": {
             "type": "string",
-            "defaultValue": "S",
+            "defaultValue": "C",
             "metadata": {
                 "description": "Redis Family (C for Standard or P for premium)."
             }
@@ -40,7 +40,7 @@
         {
             "type": "Microsoft.Cache/Redis",
             "name": "[parameters('redisCacheName')]",
-            "apiVersion": "2020-06-01",
+            "apiVersion": "2020-12-01",
             "location": "[parameters('location')]",
             "tags": {
                 "displayName": "RedisCache"

@@ -13,24 +13,17 @@
             "metadata": {
                 "description": "CosmosDB (SQL API) account name."
             }
-        },
-        "cosmosDbCapacityMode": {
-            "type": "string",
-            "metadata": {
-                "description": "Capacity mode"
-            }
         }
     },
     "variables": {
-        "databaseName": "akcontainers",
-        "capabilities": "[if(equals(parameters('cosmosDbCapacityMode'), 'Serverless'), json('[{ \"name\":\"EnableServerless\"}]'), json('[]'))]",
-        "dbOptions": "[if(equals(parameters('cosmosDbCapacityMode'), 'Serverless'), json('[]'),json('{\"autoscaleSettings\": {\"maxThroughput\": 4000}'))]"
+        "maxThroughput": "4000",
+        "databaseName": "akcontainers"
     },
     "resources": [
         {
             "type": "Microsoft.DocumentDB/databaseAccounts",
             "name": "[parameters('cosmosDbAccountName')]",
-            "apiVersion": "2021-10-15",
+            "apiVersion": "2020-04-01",
             "kind": "GlobalDocumentDB",
             "location": "[parameters('location')]",
             "tags": {
@@ -51,7 +44,6 @@
                     "maxIntervalInSeconds": 5,
                     "maxStalenessPrefix": 100
                 },
-                "capabilities": "[variables('capabilities')]",
                 "locations": [
                     {
                         "locationName": "[parameters('location')]",
@@ -65,20 +57,24 @@
         {
             "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases",
             "name": "[concat(parameters('cosmosDbAccountName'), '/', variables('databaseName'))]",
-            "apiVersion": "2021-10-15",
+            "apiVersion": "2020-04-01",
             "dependsOn": [
                 "[resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('cosmosDbAccountName'))]"
             ],
             "properties": {
+                "options": {
+                    "autoscaleSettings": {
+                        "maxThroughput": "[variables('maxThroughput')]"
+                    }
+                },
                 "resource": {
                     "id": "[variables('databaseName')]"
-                },
-                "options": "[variables('dbOptions')]"
+                }
             }
         },
         {
             "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
-            "apiVersion": "2021-10-15",
+            "apiVersion": "2020-04-01",
             "name": "[concat(parameters('cosmosDbAccountName'), concat(concat('/',variables('databaseName')),'/activitysubscriptions'))]",
             "dependsOn": [
                 "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', parameters('cosmosDbAccountName'), variables('databaseName'))]",
@@ -97,7 +93,7 @@
                         ],
                         "excludedPaths": [
                             {
-                                "path": "/_etag/?"
+                                "path": "/\"_etag\"/?"
                             }
                         ]
                     },
@@ -107,6 +103,7 @@
                         ],
                         "kind": "Hash"
                     },
+                    "defaultTtl": -1,
                     "uniqueKeyPolicy": {
                         "uniqueKeys": []
                     },
@@ -120,7 +117,7 @@
         },
         {
             "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
-            "apiVersion": "2021-10-15",
+            "apiVersion": "2020-04-01",
             "name": "[concat(parameters('cosmosDbAccountName'), concat(concat('/',variables('databaseName')),'/comments'))]",
             "dependsOn": [
                 "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', parameters('cosmosDbAccountName'), variables('databaseName'))]",
@@ -172,7 +169,7 @@
         },
         {
             "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
-            "apiVersion": "2021-10-15",
+            "apiVersion": "2020-04-01",
             "name": "[concat(parameters('cosmosDbAccountName'), concat(concat('/',variables('databaseName')),'/eventsubscriptions'))]",
             "dependsOn": [
                 "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', parameters('cosmosDbAccountName'), variables('databaseName'))]",
@@ -191,7 +188,7 @@
                         ],
                         "excludedPaths": [
                             {
-                                "path": "/_etag/?"
+                                "path": "/\"_etag\"/?"
                             }
                         ]
                     },
@@ -226,7 +223,7 @@
         },
         {
             "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
-            "apiVersion": "2021-10-15",
+            "apiVersion": "2020-04-01",
             "name": "[concat(parameters('cosmosDbAccountName'), concat(concat('/',variables('databaseName')),'/leases'))]",
             "dependsOn": [
                 "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', parameters('cosmosDbAccountName'), variables('databaseName'))]",
@@ -268,7 +265,7 @@
         },
         {
             "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
-            "apiVersion": "2021-10-15",
+            "apiVersion": "2020-04-01",
             "name": "[concat(parameters('cosmosDbAccountName'), concat(concat('/',variables('databaseName')),'/other'))]",
             "dependsOn": [
                 "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', parameters('cosmosDbAccountName'), variables('databaseName'))]",
@@ -287,7 +284,7 @@
                         ],
                         "excludedPaths": [
                             {
-                                "path": "/_etag/?"
+                                "path": "/\"_etag\"/?"
                             },
                             {
                                 "path": "/Message/?"
@@ -314,7 +311,7 @@
         },
         {
             "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
-            "apiVersion": "2021-10-15",
+            "apiVersion": "2020-04-01",
             "name": "[concat(parameters('cosmosDbAccountName'), concat(concat('/',variables('databaseName')),'/streamactivities'))]",
             "dependsOn": [
                 "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', parameters('cosmosDbAccountName'), variables('databaseName'))]",
@@ -327,32 +324,15 @@
                         "indexingMode": "consistent",
                         "automatic": true,
                         "includedPaths": [
-                            {
-                                "path": "/Priority/?"
-                            },
-                            {
-                                "path": "/EventSubscriptionId/?"
-                            },
-                            {
-                                "path": "/Uac/?"
-                            },
-                            {
-                                "path": "/Activity/Object/LanguageId/?"
-                            },
-                            {
-                                "path": "/ActionDate/?"
-                            },
-                            {
-                                "path": "/Tags/[]/?"
-                            }
+                            { "path": "/Priority/?" },
+                            { "path": "/EventSubscriptionId/?" },
+                            { "path": "/Uac/?" },
+                            { "path": "/Activity/Object/LanguageId/?" },
+                            { "path": "/ActionDate/?" }
                         ],
                         "excludedPaths": [
-                            {
-                                "path": "/*"
-                            },
-                            {
-                                "path": "/_etag/?"
-                            }
+                            { "path": "/*" },
+                            { "path": "/\"_etag\"/?" }
                         ]
                     },
                     "partitionKey": {
@@ -375,82 +355,7 @@
         },
         {
             "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
-            "apiVersion": "2021-10-15",
-            "name": "[concat(parameters('cosmosDbAccountName'), concat(concat('/',variables('databaseName')),'/teamprocess'))]",
-            "dependsOn": [
-                "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', parameters('cosmosDbAccountName'), variables('databaseName'))]",
-                "[resourceId('Microsoft.DocumentDB/databaseAccounts', parameters('cosmosDbAccountName'))]"
-            ],
-            "properties": {
-                "resource": {
-                    "id": "teamprocess",
-                    "indexingPolicy": {
-                        "indexingMode": "consistent",
-                        "automatic": true,
-                        "includedPaths": [
-                            { "path": "/AuthorizedActor/Id/?" },
-                            { "path": "/AuthorizedActor/Other/?" },
-                            { "path": "/IsHttpRequest/?" },
-                            { "path": "/StartRoleId/?" },
-                            { "path": "/RoleIds/[]/?" },
-                            { "path": "/Metadata/ProcessType/?" },
-                            { "path": "/Metadata/HasEverBeenActive/?" },
-                            { "path": "/Metadata/IsActive/?" },
-                            { "path": "/Metadata/Owners/[]/Id/?" },
-                            { "path": "/ProcessId/?" },
-                            { "path": "/CurrentSiteIdWebId/?" },
-                            { "path": "/Status/?" },
-                            { "path": "/CreatedBy/Id/?" },
-                            { "path": "/CreatedDate/?" },
-                            { "path": "/ClosedDate/?" },
-                            { "path": "/DueDate/?" },
-                            { "path": "/PropertyValues/*" },
-                            { "path": "/QueryProperties/*" },
-                            { "path": "/ChoiceProperties/[]/K/?" },
-                            { "path": "/ChoiceProperties/[]/V/?" },
-                            { "path": "/CreatedById/?" },
-                            { "path": "/InstanceOwners/[]/?" },
-                            { "path": "/TaskMetrics/[]/TaskId/?" },
-                            { "path": "/TaskMetrics/[]/AssigneeId/?" },
-                            { "path": "/TaskMetrics/[]/RoleId/?" },
-                            { "path": "/Tasks/[]/Assignee/Id/?" },
-                            { "path": "/Tasks/[]/RoleId/?" },
-                            { "path": "/Tasks/[]/Status/?" },
-                            { "path": "/Tasks/[]/StatusDate/?" },
-                            { "path": "/Tasks/[]/ActualDueDate/?" },
-                            { "path": "/Tasks/[]/IsAssignable/?" },
-                            { "path": "/Tasks/[]/IsOverdue/?" }
-                        ],
-                        "excludedPaths": [
-                            {
-                                "path": "/*"
-                            },
-                            {
-                                "path": "/_etag/?"
-                            }
-                        ]
-                    },
-                    "partitionKey": {
-                        "paths": [
-                            "/PartitionKey"
-                        ],
-                        "kind": "Hash"
-                    },
-                    "defaultTtl": -1,
-                    "uniqueKeyPolicy": {
-                        "uniqueKeys": []
-                    },
-                    "conflictResolutionPolicy": {
-                        "mode": "LastWriterWins",
-                        "conflictResolutionPath": "/_ts"
-                    }
-                },
-                "options": {}
-            }
-        },
-        {
-            "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers",
-            "apiVersion": "2021-10-15",
+            "apiVersion": "2020-04-01",
             "name": "[concat(parameters('cosmosDbAccountName'), concat(concat('/',variables('databaseName')),'/users'))]",
             "dependsOn": [
                 "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', parameters('cosmosDbAccountName'), variables('databaseName'))]",
@@ -469,7 +374,7 @@
                         ],
                         "excludedPaths": [
                             {
-                                "path": "/_etag/?"
+                                "path": "/\"_etag\"/?"
                             }
                         ]
                     },
@@ -493,7 +398,7 @@
         },
         {
             "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/storedProcedures",
-            "apiVersion": "2021-10-15",
+            "apiVersion": "2020-04-01",
             "name": "[concat(parameters('cosmosDbAccountName'), concat(concat('/',variables('databaseName')),'/other/bulkDeleteSproc'))]",
             "dependsOn": [
                 "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers', parameters('cosmosDbAccountName'), variables('databaseName'), 'other')]",
