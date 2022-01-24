@@ -6,31 +6,31 @@
             "value": "eastus2"
         },
         "webName": {
-            "value": "app-zorantest03"
+            "value": "app-akbpstest55"
         },
         "webSku": {
             "value": "P2V2"
         },
         "storageAccountName": {
-            "value": "stzorantest03"
+            "value": "stakbpstest55"
         },
         "storageAccountSku": {
-            "value": "Standard_LRS"
+            "value": "Standard_GRS"
         },
         "keyVaultName": {
-            "value": "kv-zorantest03"
+            "value": "kv-akbpstest55"
         },
         "keyVaultSku": {
             "value": "Standard"
         },
         "cognitiveSearchName": {
-            "value": "srch-zorantest03"
+            "value": "srch-akbpstest55"
         },
         "cognitiveSearchSku": {
             "value": "standard"
         },
         "redisCacheName": {
-            "value": "redis-zorantest03"
+            "value": "redis-akbpstest55"
         },
         "redisSkuName": {
             "value": "Standard"
@@ -42,19 +42,25 @@
             "value": "1"
         },
         "funcAppName": {
-            "value": "func-zorantest03"
+            "value": "func-akbpstest55"
         },
         "cosmosDBAccountName": {
-            "value": "cosmos-zorantest03"
+            "value": "cosmos-akbpstest55"
+        },
+        "cosmosDbCapacityMode":{
+            "value":"Throughput"
+        },
+        "packageVersion": {
+            "value": ""
         },
         "workspacesLogName": {
-            "value": "log-zorantest03"
+            "value": "log-akbpstest55"
         },
         "webAppPackageUrl": {
-            "value": "https://stakcloud.blob.core.windows.net/marketplace/5.0.2011.2340-AppManager.zip?sp=rl&st=2021-10-18T14:29:33Z&se=2021-10-19T14:29:33Z&sv=2020-08-04&sr=b&sig=3M6i%2Blx6g4i3qxsFKsMBB6ByT%2Blp3neT%2BIREw92V080%3D"
+            "value": "https://stakcloud.blob.core.windows.net/marketplace/5.0.2011.2358-AppManager.zip?sp=r&st=2022-01-24T14:30:23Z&se=2022-01-24T22:30:23Z&spr=https&sv=2020-08-04&sr=b&sig=muAKV5a0OYj%2Fo08mAlkKX4pPQHPeI2k8Ky4j%2B0xwprg%3D"
         },
-        "funcAppPackageUrl": {
-            "value": "https://stakcloud.blob.core.windows.net/marketplace/5.0.2106.1701-Functions.zip?sp=rl&st=2021-10-18T14:29:53Z&se=2021-10-19T14:29:53Z&sv=2020-08-04&sr=b&sig=20l1Y3SkJm%2B3TRlBDTqMQ0sSm50V7VKzbsJFm6S10Yc%3D"
-        } 
+        "funcAppPackageUrl":{
+            "value":"https://stakcloud.blob.core.windows.net/marketplace/5.0.2106.1701-Functions.zip?sp=r&st=2022-01-24T14:31:08Z&se=2022-01-24T22:31:08Z&spr=https&sv=2020-08-04&sr=b&sig=WhLnsrK2fqPivzoy4hzn6%2B9iVBCTlehNVtz4s6tgQPw%3D"
+        }
     }
 }
