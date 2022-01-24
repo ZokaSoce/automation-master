@@ -1,0 +1,66 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "eastus2"
+        },
+        "webName": {
+            "value": "app-akbpstest55"
+        },
+        "webSku": {
+            "value": "P2V2"
+        },
+        "storageAccountName": {
+            "value": "stakbpstest55"
+        },
+        "storageAccountSku": {
+            "value": "Standard_GRS"
+        },
+        "keyVaultName": {
+            "value": "kv-akbpstest55"
+        },
+        "keyVaultSku": {
+            "value": "Standard"
+        },
+        "cognitiveSearchName": {
+            "value": "srch-akbpstest55"
+        },
+        "cognitiveSearchSku": {
+            "value": "standard"
+        },
+        "redisCacheName": {
+            "value": "redis-akbpstest55"
+        },
+        "redisSkuName": {
+            "value": "Standard"
+        },
+        "redisSkuFamily": {
+            "value": "C"
+        },
+        "redisSkuCapacity": {
+            "value": "1"
+        },
+        "funcAppName": {
+            "value": "func-akbpstest55"
+        },
+        "cosmosDBAccountName": {
+            "value": "cosmos-akbpstest55"
+        },
+        "cosmosDbCapacityMode":{
+            "value":"Throughput"
+        },
+        "packageVersion": {
+            "value": ""
+        },
+        "workspacesLogName": {
+            "value": "log-akbpstest55"
+        },
+        "webAppPackageUrl": {
+            "value": "https://stakcloud.blob.core.windows.net/marketplace/5.0.2011.2358-AppManager.zip?sp=r&st=2022-01-24T14:30:23Z&se=2022-01-24T22:30:23Z&spr=https&sv=2020-08-04&sr=b&sig=muAKV5a0OYj%2Fo08mAlkKX4pPQHPeI2k8Ky4j%2B0xwprg%3D"
+        },
+        "funcAppPackageUrl":{
+            "value":"https://stakcloud.blob.core.windows.net/marketplace/5.0.2106.1701-Functions.zip?sp=r&st=2022-01-24T14:31:08Z&se=2022-01-24T22:31:08Z&spr=https&sv=2020-08-04&sr=b&sig=WhLnsrK2fqPivzoy4hzn6%2B9iVBCTlehNVtz4s6tgQPw%3D"
+        }
+    }
+}
