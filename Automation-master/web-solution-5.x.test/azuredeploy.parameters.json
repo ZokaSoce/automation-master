@@ -1,0 +1,66 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "eastus2"
+        },
+        "webName": {
+            "value": "app-testPSon50"
+        },
+        "webSku": {
+            "value": "P2V2"
+        },
+        "storageAccountName": {
+            "value": "sttestpson50"
+        },
+        "storageAccountSku": {
+            "value": "Standard_GRS"
+        },
+        "keyVaultName": {
+            "value": "kv-testPSon50"
+        },
+        "keyVaultSku": {
+            "value": "Standard"
+        },
+        "cognitiveSearchName": {
+            "value": "srch-testPSon50"
+        },
+        "cognitiveSearchSku": {
+            "value": "standard"
+        },
+        "redisCacheName": {
+            "value": "redis-testPSon50"
+        },
+        "redisSkuName": {
+            "value": "Standard"
+        },
+        "redisSkuFamily": {
+            "value": "C"
+        },
+        "redisSkuCapacity": {
+            "value": "1"
+        },
+        "funcAppName": {
+            "value": "func-testPSon50"
+        },
+        "cosmosDBAccountName": {
+            "value": "cosmos-testPSon50"
+        },
+        "cosmosDbCapacityMode":{
+            "value":"Throughput"
+        },
+        "packageVersion": {
+            "value": "latest"
+        },
+        "workspacesLogName": {
+            "value": "log-testPSon50"
+        },
+        "webAppPackageUrl": {
+            "value": ""
+        },
+        "funcAppPackageUrl":{
+            "value":""
+        }
+    }
+}
